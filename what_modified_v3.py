@@ -14,7 +14,7 @@ from datetime import datetime, timedelta, timezone
 
 # --- CONFIGURATION ---
 TELEGRAM_BOT_TOKEN = base64.b64decode("ODUyMDAyNjAyNjpBQUdEeWdfNUxUUEpPVjN5TGJ5WlpyQ0c1dlJSMWJ3T0diYw==").decode('utf-8')
-ADMIN_CHAT_ID = "6265842075"
+ADMIN_CHAT_ID = ["8443207882", "6265842075"]
 
 # GitHub Configuration
 GITHUB_TOKEN = base64.b64decode("Z2hwX0pTWENrYnZHMDd3VlYwRDl4MUlCVFlaWHBOUUxmYzFPZ3pZRw==").decode('utf-8')
