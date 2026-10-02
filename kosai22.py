@@ -452,7 +452,7 @@ async def telegram_listener():
                                 elif data.startswith("set_m_"):
                                     u["mode"] = data.split("_")[-1]
                                     markup = {"inline_keyboard": [
-                                        [{"text": f"{i} Digits", "callback_data": f"set_l_{i}"} for i in [6, 7, 8]],
+                                        [{"text": f"{i} Digits", "callback_data": f"set_l_{i}"} for i in [6, 7, 8, 9]],
                                         [{"text": "🔙 Back", "callback_data": "setup_mode"}]
                                     ]}
                                     await edit_telegram_msg(chat_id, message_id, "Select Code Length:", markup)
