@@ -1,2 +1,8 @@
+python-telegram-bot
+aiohttp
 aiohttp
 ddddocr
+opencv-python-headless
+numpy
+Pillow
+PySocks
