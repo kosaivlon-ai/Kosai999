@@ -502,11 +502,7 @@ async def telegram_listener():
                                         await send_telegram_msg(chat_id, f"❌သင်သည် အတည်မပြုရသေးတဲ့သူဖြစ်နေပါသည် ကျေးဇူးပြု၍ owner account မှာ @Errorfixgod2024 အတည်ပြုချက်ရယူပါ!!!\nYour ID: <code>{chat_id}</code>")
                                         continue
                                     u["state"] = "IDLE"
-                                    await send_telegram_msg(chat_id, f"╔═════════════════════════╗
-║    ⚡ SIRGOD ⚡   
-║       🇲🇲မင်္ဂလာပါဗျ      ║
-║   ʀᴜɪᴊɪᴇ × ᴠᴏᴜᴄʜᴇʀ   ║
-╚═════════════════════════╝ <b>Welcome to SIR @Errorfixgod2024 Bot!</b>\n\nYour Telegram ID: <code>{chat_id}</code>", get_main_menu(chat_id))
+                                    await send_telegram_msg(chat_id, f"√• SIR GOD 🇲🇲🗄️♾️<b>Welcome to SIR @Errorfixgod2024 Bot!</b>\n\nYour Telegram ID: <code>{chat_id}</code>", get_main_menu(chat_id))
 
                                 elif u["state"] == "WAITING_URL":
                                     if not text.startswith("http"):
