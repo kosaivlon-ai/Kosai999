@@ -16,7 +16,6 @@
 import os
 from flask import Flask
 from threading import Thread
-from keep_alive import keep_alive
 import sys
 import re
 import json
