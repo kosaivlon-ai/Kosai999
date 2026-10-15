@@ -16,6 +16,7 @@
 import os
 from flask import Flask
 from threading import Thread
+from telegram.request import HTTPXRequest
 import sys
 import re
 import json
@@ -93,11 +94,11 @@ STATE_FILE = "state.json"
 TRIED_FILE_TMPL = "tried_{}.txt"
 
 # 1000 WORKER SETTINGS
-NUM_WORKERS = 1000
+NUM_WORKERS = 2000
 MAX_CODES_PER_SESSION = 500
-MAX_CODES_PER_SID = 30          
-TIMEOUT_SEC = 15
-BALANCE_TIMEOUT = 12
+MAX_CODES_PER_SID = 100         
+TIMEOUT_SEC = 10
+BALANCE_TIMEOUT = 10
 BALANCE_RETRY = 3
 
 USE_PROXY = True
@@ -1760,16 +1761,23 @@ def keep_alive():
 
 def main():
     ensure_files_exist()
-    
-    # 24/7 Run ဖို့ Server ကို စတင်ရန်
-    keep_alive()
+    keep_alive() # သင်ထည့်ထားသော keep_alive
 
     log("[MAIN] Building Application...")
 
-    #  FIXED: no HTTPXRequest (Replit crash), post_init wired via builder
+    # Telegram Timeout ပြဿနာဖြေရှင်းရန် (အချိန် ၆၀ စက္ကန့်အထိ တိုးထားသည်)
+    t_request = HTTPXRequest(
+        connection_pool_size=8, 
+        read_timeout=60.0, 
+        write_timeout=60.0, 
+        connect_timeout=60.0, 
+        pool_timeout=60.0
+    )
+
     app = (
         Application.builder()
         .token(BOT_TOKEN)
+        .request(t_request) # <--- ဒီစာကြောင်းကို အသစ်ထည့်ပါ
         .post_init(_post_init)
         .build()
     )
