@@ -14,6 +14,9 @@
 """
 
 import os
+from flask import Flask
+from threading import Thread
+from keep_alive import keep_alive
 import sys
 import re
 import json
@@ -1191,7 +1194,7 @@ async def live_dashboard_updater(context, user_id):
 
             text = (
                 "╔═════════════════════════╗\n"
-                "║   ⚡ <b>NGATON SCANNER</b> ⚡   ║\n"
+                "║   ⚡ <b>SIRGOD SCANNER</b> ⚡   ║\n"
                 "║   ʀᴜɪᴊɪᴇ × ᴠᴏᴜᴄʜᴇʀ   ║\n"
                 "╚═════════════════════════╝\n"
                 "\n"
@@ -1213,7 +1216,7 @@ async def live_dashboard_updater(context, user_id):
                 "\n"
                 f"{hit_section}\n"
                 "\n"
-                "╭─ ⚡ NGATON · @NgaTON_0 ─╮"
+                "╭─ ⚡ NGATON · @Errorfixgod2024─╮"
             )
             markup = InlineKeyboardMarkup([
                 [InlineKeyboardButton("🛑 STOP SCAN", callback_data="stop_scan")]
@@ -1254,7 +1257,7 @@ async def live_dashboard_updater_final(context, user_id, state):
         "\n"
         f"{hit_section}\n"
         "\n"
-        "╭─ ⚡ NGATON · @NgaTON_0 ─╮"
+        "╭─ ⚡ NGATON · @Errorfixgod2024 ─╮"
     )
     markup = InlineKeyboardMarkup([
         [InlineKeyboardButton("‹ 🦇 RETURN", callback_data="btn_back_main")]
@@ -1307,7 +1310,7 @@ async def run_user_scanner(context, user_id):
                   "🕷️ No proxies — Using your IP\n"
                   "🔥 Scan will start now\n\n"
                   "💡 <b>Tip:</b> Add proxies for safer scan\n"
-                  "📌 @NgaTON_0"),
+                  "📌 @Errorfixgod2024"),
             parse_mode=ParseMode.HTML)
 
     if resume and saved:
@@ -1446,7 +1449,7 @@ def _build_main_menu_text(mode, active, saved_url, user_id):
 
     return (
         "╔═════════════════════════╗\n"
-        "║    ⚡ <b>NGATON</b> ⚡         ║\n"
+        "║    ⚡ <b>SIRGOD</b> ⚡         ║\n"
         "║   ʀᴜɪᴊɪᴇ × ᴠᴏᴜᴄʜᴇʀ   ║\n"
         "╚═════════════════════════╝\n"
         "\n"
@@ -1457,7 +1460,7 @@ def _build_main_menu_text(mode, active, saved_url, user_id):
         f"{resume_line}"
         "\n"
         "💡 <b>Setup:</b> Portal → Proxies → Start\n"
-        "📌 Contact: @NgaTON_0"
+        "📌 Contact: @Errorfixgod2024"
     )
 
 
@@ -1737,13 +1740,30 @@ async def _post_init(application):
     asyncio.create_task(state_saver_loop())
     log(bgreen + "[MAIN] Background tasks started" + reset)
 
+# ==============================================================================
+#  KEEP ALIVE 24/7 SERVER
+# ==============================================================================
+app = Flask(__name__)
 
+@app.route('/')
+def home():
+    return "Bot is running 24/7!"
+
+def run_server():
+    app.run(host='0.0.0.0', port=8080)
+
+def keep_alive():
+    t = Thread(target=run_server)
+    t.start()
 # ==============================================================================
 #  MAIN — SIMPLIFIED (Replit-safe, no HTTPXRequest, no close_loop)
 # ==============================================================================
 
 def main():
     ensure_files_exist()
+    
+    # 24/7 Run ဖို့ Server ကို စတင်ရန်
+    keep_alive()
 
     log("[MAIN] Building Application...")
 
