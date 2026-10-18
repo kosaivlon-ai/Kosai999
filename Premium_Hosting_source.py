@@ -52,7 +52,7 @@ def keep_alive():
 # --- End Flask Keep Alive ---
 
 # --- Configuration ---
-TOKEN = '8708695435:AAG5YJWmuGauxZtBT4OMsXQcc27zuNRYOMg' # Replace with your actual token
+TOKEN = '8780022425:AAFxAHR-8AFDTF-7vI-WEEJtO-IsHetEk-Q' # Replace with your actual token
 OWNER_ID = 6265842075 # Replace with your Owner ID
 ADMIN_ID = 6182661436 # Replace with your Admin ID (can be same as Owner)
 YOUR_USERNAME = '@kosaich1' # Replace with your Telegram username (without the @)
@@ -943,25 +943,28 @@ def create_reply_keyboard_main_menu(user_id):
         markup.add(*[types.KeyboardButton(text) for text in row_buttons_text])
     return markup
 
-def create_control_buttons(script_owner_id, file_name, is_running=True): # Parameter renamed
+def create_control_buttons(script_owner_id, file_name, is_running=True): 
     markup = types.InlineKeyboardMarkup(row_width=2)
-    # Callbacks use script_owner_id
+    
+    # ဖိုင်နာမည် ရှည်နေပါက အစပိုင်းကိုသာ ဖြတ်ယူရန် (Telegram Callback Data Limit ကို မကျော်စေရန်)
+    short_file_name = file_name[:30] if len(file_name) > 30 else file_name
+
     if is_running:
         markup.row(
-            types.InlineKeyboardButton("🔴 Stop", callback_data=f'stop_{script_owner_id}_{file_name}'),
-            types.InlineKeyboardButton("🔄 Restart", callback_data=f'restart_{script_owner_id}_{file_name}')
+            types.InlineKeyboardButton("🔴 Stop", callback_data=f'stop_{script_owner_id}_{short_file_name}'),
+            types.InlineKeyboardButton("🔄 Restart", callback_data=f'restart_{script_owner_id}_{short_file_name}')
         )
         markup.row(
-            types.InlineKeyboardButton("🗑️ Delete", callback_data=f'delete_{script_owner_id}_{file_name}'),
-            types.InlineKeyboardButton("📜 Logs", callback_data=f'logs_{script_owner_id}_{file_name}')
+            types.InlineKeyboardButton("🗑️ Delete", callback_data=f'delete_{script_owner_id}_{short_file_name}'),
+            types.InlineKeyboardButton("📜 Logs", callback_data=f'logs_{script_owner_id}_{short_file_name}')
         )
     else:
         markup.row(
-            types.InlineKeyboardButton("🟢 Start", callback_data=f'start_{script_owner_id}_{file_name}'),
-            types.InlineKeyboardButton("🗑️ Delete", callback_data=f'delete_{script_owner_id}_{file_name}')
+            types.InlineKeyboardButton("🟢 Start", callback_data=f'start_{script_owner_id}_{short_file_name}'),
+            types.InlineKeyboardButton("🗑️ Delete", callback_data=f'delete_{script_owner_id}_{short_file_name}')
         )
         markup.row(
-            types.InlineKeyboardButton("📜 View Logs", callback_data=f'logs_{script_owner_id}_{file_name}')
+            types.InlineKeyboardButton("📜 View Logs", callback_data=f'logs_{script_owner_id}_{short_file_name}')
         )
     markup.add(types.InlineKeyboardButton("🔙 Back to Files", callback_data='check_files'))
     return markup
@@ -1210,7 +1213,8 @@ def _logic_check_files(message):
         status_icon = "🟢 Running" if is_running else "🔴 Stopped"
         btn_text = f"{file_name} ({file_type}) - {status_icon}"
         # Callback data includes user_id as script_owner_id
-        markup.add(types.InlineKeyboardButton(btn_text, callback_data=f'file_{user_id}_{file_name}'))
+        short_file_name = file_name[:30] if len(file_name) > 30 else file_name
+markup.add(types.InlineKeyboardButton(btn_text, callback_data=f'file_{user_id}_{short_file_name}'))
     bot.reply_to(message, "📂 Your files:\nClick to manage.", reply_markup=markup, parse_mode='Markdown')
 
 def _logic_bot_speed(message):
