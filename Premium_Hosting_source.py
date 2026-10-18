@@ -52,7 +52,7 @@ def keep_alive():
 # --- End Flask Keep Alive ---
 
 # --- Configuration ---
-TOKEN = '8771963791:AAHZa8dc3jdwegNuyKhWjFBOOIMk3x0t6mg' # Replace with your actual token
+TOKEN = '8765475616:AAE5ETWSaRnbi21aNyIiJa8jytVXkNfzs8I' # Replace with your actual token
 OWNER_ID = 6265842075 # Replace with your Owner ID
 ADMIN_ID = 6182661436 # Replace with your Admin ID (can be same as Owner)
 YOUR_USERNAME = '@kosaich1' # Replace with your Telegram username (without the @)
@@ -355,7 +355,7 @@ def _python_module_is_available(module_name, user_folder):
 def install_python_package(package_name, import_name, message):
     try:
         bot.reply_to(message, f"📦 Missing `{import_name}` → installing `{package_name}`...", parse_mode='Markdown')
-        cmd = [sys.executable, '-m', 'pip', 'install', '--disable-pip-version-check', package_name]
+        cmd = [sys.executable, '-m', 'pip', 'install', '--break-system-packages', '--disable-pip-version-check', package_name]
         logger.info(f"Auto-install: {' '.join(cmd)}")
         result = subprocess.run(cmd, capture_output=True, text=True, check=False,
                                 encoding='utf-8', errors='ignore', timeout=600)
@@ -1017,7 +1017,7 @@ def handle_zip_file(downloaded_file_content, file_name_zip, message):
             logger.info(f"requirements.txt found, installing: {req_path}")
             bot.reply_to(message, f"🔄 Installing Python deps from `{req_file}`...")
             try:
-                command = [sys.executable, '-m', 'pip', 'install', '-r', req_path]
+                command = [sys.executable, '-m', 'pip', 'install', '--break-system-packages', '-r', req_path]
                 result = subprocess.run(command, capture_output=True, text=True, check=True, encoding='utf-8', errors='ignore')
                 logger.info(f"pip install from requirements.txt OK. Output:\n{result.stdout}")
                 bot.reply_to(message, f"✅ Python deps from `{req_file}` installed.")
@@ -2481,7 +2481,10 @@ if __name__ == '__main__':
     logger.info("="*40 + "\n🤖 Bot Starting Up...\n" + f"🐍 Python: {sys.version.split()[0]}\n" +
                 f"🔧 Base Dir: {BASE_DIR}\n📁 Upload Dir: {UPLOAD_BOTS_DIR}\n" +
                 f"📊 Data Dir: {IROTECH_DIR}\n🔑 Owner ID: {OWNER_ID}\n🛡️ Admins: {admin_ids}\n" + "="*40)
-    keep_alive()
+    # The fixed control website owns the public web process.
+    # Only enable this nested server when running the bot standalone.
+    if os.environ.get("ENABLE_CHILD_KEEPALIVE", "0") == "1":
+        keep_alive()
     logger.info("🚀 Starting polling...")
     while True:
         try:
