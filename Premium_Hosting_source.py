@@ -1202,19 +1202,23 @@ def _logic_upload_file(message):
 
 def _logic_check_files(message):
     user_id = message.from_user.id
-    # chat_id = message.chat.id # user_id will be used as script_owner_id for buttons
     user_files_list = user_files.get(user_id, [])
+    
     if not user_files_list:
         bot.reply_to(message, "📂 Your files:\n\n(No files uploaded yet)")
         return
+        
     markup = types.InlineKeyboardMarkup(row_width=1)
+    
     for file_name, file_type in sorted(user_files_list):
-        is_running = is_bot_running(user_id, file_name) # Use user_id for checking status
+        is_running = is_bot_running(user_id, file_name)
         status_icon = "🟢 Running" if is_running else "🔴 Stopped"
         btn_text = f"{file_name} ({file_type}) - {status_icon}"
-        # Callback data includes user_id as script_owner_id
+        
         short_file_name = file_name[:30] if len(file_name) > 30 else file_name
-markup.add(types.InlineKeyboardButton(btn_text, callback_data=f'file_{user_id}_{short_file_name}'))
+        markup.add(types.InlineKeyboardButton(btn_text, callback_data=f'file_{user_id}_{short_file_name}'))
+        
+    # အောက်ပါစာကြောင်းသည် for နှင့် တစ်တန်းတည်းဖြစ်ရမည် (အထဲသို့ ဝင်မနေရပါ)
     bot.reply_to(message, "📂 Your files:\nClick to manage.", reply_markup=markup, parse_mode='Markdown')
 
 def _logic_bot_speed(message):
