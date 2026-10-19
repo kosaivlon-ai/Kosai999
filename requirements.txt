@@ -1,4 +1,3 @@
-python-telegram-bot
 aiohttp
 aiohttp
 ddddocr
@@ -6,3 +5,8 @@ opencv-python-headless
 numpy
 Pillow
 PySocks
+Flask==3.1.0
+pyTelegramBotAPI>=4.25.0
+psutil>=6.0.0
+requests>=2.32.0
+python-telegram-bot
