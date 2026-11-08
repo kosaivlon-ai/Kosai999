@@ -1,3 +1,11 @@
 {
-    "users": {}
+    "users": {
+        "STR-U0A427": {
+            "key": "U1RSLVUwQTQyN3wxNzk0MTQ1MTExfDRkMDU3ZTk0MjJhMTg3OTY=",
+            "duration": "30 \u1019\u102d\u1014\u1005\u103a",
+            "expire_timestamp": 1794145111,
+            "status": "Active",
+            "note": "uset"
+        }
+    }
 }
