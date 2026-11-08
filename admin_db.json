@@ -1,11 +1,11 @@
 {
     "users": {
         "STR-U0A427": {
-            "key": "U1RSLVUwQTQyN3wxODI1NjgxNTExfGNhZDUxYTYxZGFmMmUxOWE=",
-            "duration": "1 \u1014\u103e\u1005\u103a",
-            "expire_timestamp": 1825681511,
-            "status": "Revoked",
-            "note": "admin"
+            "key": "U1RSLVUwQTQyN3wxNzk0NzUwNDAzfGIzNDNiMjkyMTFhZThjZjM=",
+            "duration": "7 \u101b\u1000\u103a",
+            "expire_timestamp": 1794750403,
+            "status": "Active",
+            "note": "a0"
         },
         "B02E21908658": {
             "key": "QjAyRTIxOTA4NjU4fDE3OTQxNDgyNDR8NjYyOWRkZmQyMGUzNjA0NA==",
