@@ -5,11 +5,9 @@
             "expire_timestamp": 1825909403
         },
         "B02E21908658": {
-            "key": "QjAyRTIxOTA4NjU4fDE3OTQyOTA1MTF8ZGNiZWU2NWU1NzhjNjJlOA==",
-            "duration": "1 \u101b\u1000\u103a",
-            "expire_timestamp": 1794290511,
             "status": "Active",
-            "note": ""
+            "expire_timestamp": 1795350201,
+            "data_used_mb": 0
         },
         "BE9FD12737EF": {
             "status": "Active",
