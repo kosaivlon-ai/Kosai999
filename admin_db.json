@@ -22,11 +22,9 @@
             "note": "7"
         },
         "2537A02BBB51": {
-            "key": "MjUzN0EwMkJCQjUxfDE3OTQ1NzE2OTB8ZWYyYzA5ZTM4ZjgxNzQzZA==",
-            "duration": "3 \u101b\u1000\u103a",
-            "expire_timestamp": 1794571690,
             "status": "Active",
-            "note": "pp"
+            "expire_timestamp": 1795396542,
+            "data_used_mb": 0
         }
     }
 }
